@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <td>
+    <td id="mayor">
       <%=render :partial => "mayor/results" %>
     </td>
     <td>
@@ -16,3 +16,5 @@
     </td>
   </tr>
 </table>
+<button onclick="<%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>">Refresh</button>
+
