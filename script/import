@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'rexml/document'
+
+file = File.new(ARGV[0])
+doc = REXML::Document.new(file.read)
+doc.root.each_element('//arrondissement') do |tag|
+  @arr = Arrondissement.find_or_initialize_by_mtl_id tag.attributes['id']
+  if @arr.new_record?
+    @arr.nom = tag.text
+    @arr.save!
+    puts @arr.inspect
+  end
+end
+
