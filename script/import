@@ -22,3 +22,11 @@ doc.root.each_element('//parti') do |tag|
   end
 end
 
+doc.root.each_element('//district') do |tag|
+  @arr = District.find_or_initialize_by_mtl_id tag.attributes['id']
+  if @arr.new_record?
+    @arr.nom = tag.text
+    @arr.save!
+    puts @arr.inspect
+  end
+end
