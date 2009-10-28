@@ -50,6 +50,7 @@ doc.root.each_element('//resultats_maire/sommaire/candidat') do |tag|
     @maire.update_attribute attry, tag.elements[attry].text
   end
   @maire.mtl_id = tag.attributes['id']
+  @maire.parti = Parti.find_by_mtl_id(@maire.mtl_id)
   @maire.save!
   puts @maire.inspect
 end
