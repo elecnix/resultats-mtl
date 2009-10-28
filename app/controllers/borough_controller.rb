@@ -8,7 +8,7 @@ class BoroughController < ApplicationController
     elsif !params['nom'].nil?
       @arrondissement = Arrondissement.find(:all, :conditions => "nom LIKE '%#{params['nom']}%'")[0]
     else
-      @arrondissement = Arrondissement.find(:all, :limit => 3, :order => 'random()')[0]
+      @arrondissement = Arrondissement.find(:all, :limit => 3, :order => 'random()', :conditions => 'mtl_id > 0')[0]
     end
     #@arrondissement = Arrondissement.find(:first)
     render :layout => false

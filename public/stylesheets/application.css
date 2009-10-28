@@ -10,3 +10,7 @@ td {
 td.numeric {
   text-align: right;
 }
+#mayor {
+  width: 50%;
+}
+
