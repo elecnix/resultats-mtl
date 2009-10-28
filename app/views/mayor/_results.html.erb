@@ -1,6 +1,8 @@
 <h2>Mayor Results</h2>
 <ul>
-<li>Gérald Tremblay</li>
-<li>Richard Bergeron</li>
+<% maires ||= @maires %>
+<% maires.each do |maire| %>
+  <li><%=maire.prenom%> <%=maire.nom%></li>
+<% end %>
 </ul>
 
