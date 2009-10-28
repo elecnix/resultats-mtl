@@ -4,13 +4,30 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/application.css"/>
   <%= javascript_include_tag "prototype" %>
   <script type="text/javascript">
+    var countdown = refresh_secs = 60;
+    function initialize() {
+      reload_all();
+      setInterval( "tick()", 1000 );
+      update_countdown();
+    }
     function reload_all() {
       <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
+    }
+    function tick() {
+      countdown--;
+      if (countdown == 0) {
+        reload_all();
+        countdown = refresh_secs;
+      }
+      update_countdown();
+    }
+    function update_countdown() {
+      $('countdown_secs').update("" + countdown);
     }
   </script>
 </head>
 <body>
 <%=yield%>
-  <body onload="reload_all()">
+  <body onload="initialize()">
 
 </html>
