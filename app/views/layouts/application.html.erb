@@ -3,9 +3,14 @@
   <title>Résultats Élection</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/application.css"/>
   <%= javascript_include_tag "prototype" %>
+  <script type="text/javascript">
+    function reload_all() {
+      <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
+    }
+  </script>
 </head>
 <body>
 <%=yield%>
-</body>
+  <body onload="reload_all()">
 
 </html>
