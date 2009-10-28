@@ -4,6 +4,17 @@ require 'rexml/document'
 file = File.new(ARGV[0])
 doc = REXML::Document.new(file.read)
 
+module REXML
+class Elements
+  def to_hash(&block)
+    Hash[*self.collect { |v|
+      [block.call(v)]
+    }.flatten]
+  end
+end
+end
+
+if false
 doc.root.each_element('//arrondissement') do |tag|
   @arr = Arrondissement.find_or_initialize_by_mtl_id tag.attributes['id']
   if @arr.new_record?
@@ -30,3 +41,16 @@ doc.root.each_element('//district') do |tag|
     puts @arr.inspect
   end
 end
+end
+
+doc.root.each_element('//resultats_maire/sommaire/candidat') do |tag|
+  @maire = CandidatMaire.new
+  #@maire.update_attributes tag.elements.to_hash {|e| [e.name, e.text] }
+  ['nom', 'prenom', 'nb_voix_obtenues', 'nb_voix_majorite'].each do |attry|
+    @maire.update_attribute attry, tag.elements[attry].text
+  end
+  @maire.mtl_id = tag.attributes['id']
+  @maire.save!
+  puts @maire.inspect
+end
+
