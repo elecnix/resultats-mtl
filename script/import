@@ -66,10 +66,21 @@ doc.root.each_element('//resultats_postes/poste') do |tag|
   poste.arrondissement = arrondissement
   poste.district = district
   poste.mtl_id = tag.attributes['id']
-  %W{type nom nb_electeurs_inscrits nb_total_voix_recueillies nb_bulletins_rejetes taux_participation nb_bureaux_depouilles nb_bureaux_total}.each do |attry|
+  poste.mtl_type = tag.elements['type'].text
+  %W{nom nb_electeurs_inscrits nb_total_voix_recueillies nb_bulletins_rejetes taux_participation nb_bureaux_depouilles nb_bureaux_total}.each do |attry|
     poste.update_attribute attry, tag.elements[attry].text
   end
   puts poste.inspect
   poste.save!
+  tag.each_element('candidat') do |can|
+    candidat = poste.candidats.build
+    ['nom', 'prenom', 'nb_voix_obtenues'].each do |attry|
+      candidat.update_attribute attry, can.elements[attry].text
+    end
+    candidat.parti = Parti.find_by_mtl_id(can.elements['parti'].attributes['id'])
+    candidat.mtl_id = can.attributes['id']
+    puts candidat.inspect
+    candidat.save!
+  end
 end
 
