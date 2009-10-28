@@ -1,8 +1,8 @@
 <h2>Mairie de Montréal</h2>
-<ul>
+<table>
 <% maires ||= @maires %>
 <% maires.each do |maire| %>
-  <li><%=maire.prenom%> <%=maire.nom%></li>
+  <tr><td><%=maire.prenom%> <%=maire.nom%></td><td class="numeric"><%=maire.nb_voix_obtenues%></td><td class="numeric"><%=maire.pourcentage%>%</td></tr>
 <% end %>
-</ul>
+</table>
 

@@ -7,3 +7,6 @@ h2 {
 td {
   vertical-align: top;
 }
+td.numeric {
+  text-align: right;
+}
