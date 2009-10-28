@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  mtl_id: 1
+  prenom: MyString
+  nom: MyString
+  parti_id: 1
+  nb_voix_obtenues: 1
+
+two:
+  mtl_id: 1
+  prenom: MyString
+  nom: MyString
+  parti_id: 1
+  nb_voix_obtenues: 1
