@@ -59,3 +59,17 @@ doc.root.each_element('//resultats_maire/arrondissements/arrondissement') do |ta
   end
 end
 
+doc.root.each_element('//resultats_postes/poste') do |tag|
+  arrondissement = Arrondissement.find_by_mtl_id(tag.elements['arrondissement'].attributes['id'])
+  district = District.find_by_mtl_id(tag.elements['district'].attributes['id'])
+  poste = Poste.new
+  poste.arrondissement = arrondissement
+  poste.district = district
+  poste.mtl_id = tag.attributes['id']
+  %W{type nom nb_electeurs_inscrits nb_total_voix_recueillies nb_bulletins_rejetes taux_participation nb_bureaux_depouilles nb_bureaux_total}.each do |attry|
+    poste.update_attribute attry, tag.elements[attry].text
+  end
+  puts poste.inspect
+  poste.save!
+end
+
