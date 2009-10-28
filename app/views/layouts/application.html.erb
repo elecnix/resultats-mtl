@@ -16,6 +16,7 @@
       <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
       <%= remote_function(:update => "borough", :url => "/borough/results?nom=plateau", :method => :get)%>      
       <%= remote_function(:update => "random", :url => "/borough/results", :method => :get)%>      
+      <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
       countdown = refresh_secs;
       update_countdown();
     }

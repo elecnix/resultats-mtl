@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require 'rexml/document'
 
+# TODO Empty DB and insert new records in a single DB transaction
+
 file = File.new(ARGV[0])
 doc = REXML::Document.new(file.read)
 
@@ -41,5 +43,19 @@ doc.root.each_element('//resultats_maire/sommaire/candidat') do |tag|
   @maire.parti = Parti.find_by_mtl_id(tag.elements['parti'].attributes['id'])
   @maire.save!
   puts @maire.inspect
+end
+
+doc.root.each_element('//resultats_maire/arrondissements/arrondissement') do |tag|
+  arrondissement = Arrondissement.find_by_mtl_id(tag.attributes['id'])
+  tag.each_element('candidat') do |can|
+    candidat = arrondissement.candidat_maire_arrondissements.build
+    ['nom', 'prenom', 'nb_voix_obtenues'].each do |attry|
+      candidat.update_attribute attry, can.elements[attry].text
+    end
+    candidat.mtl_id = can.attributes['id']
+    candidat.parti = Parti.find_by_mtl_id(can.elements['parti'].attributes['id'])
+    candidat.save!
+    puts candidat.inspect
+  end
 end
 

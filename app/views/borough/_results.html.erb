@@ -1,2 +1,8 @@
 <% arrondissement ||= @arrondissement %>
 <h2><%=arrondissement.nom%></h2>
+<table>
+<% arrondissement.candidat_maire_arrondissements.each do |candidat| %>
+  <tr><td><%=candidat.prenom%> <%=candidat.nom%></td><td class="numeric"><%=candidat.nb_voix_obtenues%></td></tr>
+<% end %>
+</table>
+
