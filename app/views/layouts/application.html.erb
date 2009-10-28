@@ -5,21 +5,30 @@
   <%= javascript_include_tag "prototype" %>
   <script type="text/javascript">
     var countdown = refresh_secs = 60;
+    var rotate_secs = 4;
     function initialize() {
       reload_all();
       setInterval( "tick()", 1000 );
+      setInterval( "rotate()", rotate_secs * 1000);
       update_countdown();
     }
     function reload_all() {
       <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
+      <%= remote_function(:update => "borough", :url => "/borough/results?nom=plateau", :method => :get)%>      
+      <%= remote_function(:update => "random", :url => "/borough/results", :method => :get)%>      
+      countdown = refresh_secs;
+      update_countdown();
+    }
+    function rotate() {
+      <%= remote_function(:update => "random", :url => "/borough/results", :method => :get)%>
     }
     function tick() {
       countdown--;
       if (countdown == 0) {
         reload_all();
-        countdown = refresh_secs;
+      } else {
+        update_countdown();
       }
-      update_countdown();
     }
     function update_countdown() {
       $('countdown_secs').update("" + countdown);

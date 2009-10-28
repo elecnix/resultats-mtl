@@ -3,7 +3,6 @@
     <td id="mayor">
     </td>
     <td id="borough">
-      <%=render :partial => "borough/results" %>
     </td>
   </tr>
   <tr>
@@ -11,11 +10,10 @@
       <%=render :partial => "lead/results" %>
     </td>
     <td id="random">
-      <%=render :partial => "borough/results" %>
     </td>
   </tr>
 </table>
 
 <div id="countdown">Next refresh: <span id="countdown_secs"/> seconds</div>
-<button onclick="<%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>">Refresh</button>
+<button onclick="reload_all()">Refresh</button>
 
