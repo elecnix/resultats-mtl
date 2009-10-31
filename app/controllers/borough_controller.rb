@@ -4,7 +4,11 @@ class BoroughController < ApplicationController
 
   def results
     if !params['id'].nil?
-      @arrondissement = Arrondissement.find_by_id(params['id'])
+      if params['id'] == "default"
+        @arrondissement = Affichage.find(:first).arrondissement
+      else
+        @arrondissement = Arrondissement.find_by_id(params['id'])
+      end
     elsif !params['nom'].nil?
       @arrondissement = Arrondissement.find(:all, :conditions => "nom LIKE '%#{params['nom']}%'")[0]
     else

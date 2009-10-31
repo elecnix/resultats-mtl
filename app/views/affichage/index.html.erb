@@ -1,0 +1,7 @@
+<h1>Configuration de l'affichage</h1>
+
+<% form_for @affichage do |f| %>
+  <%=f.collection_select(:arrondissement_id, Arrondissement.all, :id, :nom)%>
+  <%=submit_tag(value = "Appliquer")%>
+<% end %>
+

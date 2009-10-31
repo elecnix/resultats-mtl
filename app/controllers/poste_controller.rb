@@ -1,7 +1,12 @@
 class PosteController < ApplicationController
   def index
     if !params['arrondissement_id'].nil?
-      arrondissement = Arrondissement.find_by_id(params['arrondissement_id'])
+      if params['arrondissement_id'] == "default"
+        arrondissement = Affichage.find(:first).arrondissement
+        logger.info "Arrondissement par défaut: #{arrondissement.inspect}"
+      else
+        arrondissement = Arrondissement.find_by_id(params['arrondissement_id'])
+      end
     elsif !params['nom'].nil?
       arrondissement = Arrondissement.find(:all, :conditions => "nom LIKE '%#{params['nom']}%'")[0]
     end

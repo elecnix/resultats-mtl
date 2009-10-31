@@ -1,3 +1,43 @@
+  <script type="text/javascript">
+    var countdown = refresh_secs = 10;
+    var rotate_secs = 4;
+    var should_reload_all = false;
+    function initialize() {
+      reload_all();
+      setInterval( "tick()", 1000 );
+      setInterval( "rotate()", rotate_secs * 1000);
+      update_countdown();
+    }
+    function reload_all() {
+      <%= remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)%>
+      <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
+      <%= remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)%>      
+      <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>      
+      <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
+      countdown = refresh_secs;
+      update_countdown();
+    }
+    function rotate() {
+      if (should_reload_all) {
+        reload_all();
+        should_reload_all = false;
+      } else {
+        <%= remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)%>
+        <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>
+      }
+    }
+    function tick() {
+      countdown--;
+      if (countdown == 0) {
+        should_reload_all = true;
+      }
+      update_countdown();
+    }
+    function update_countdown() {
+      $('countdown_secs').update(should_reload_all ? "maintenant..." : "" + countdown + "s");
+    }
+  </script>
+  
 <table>
   <tr>
     <td id="mayor"></td>

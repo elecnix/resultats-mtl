@@ -108,3 +108,7 @@ ActiveRecord::Base.connection.select_rows("select parti_id, count(*) from candid
   parti.save!
 end
 
+affichage = Affichage.new
+affichage.arrondissement = Arrondissement.find(:first, :conditions => "nom LIKE '%Plateau%'")
+affichage.save!
+

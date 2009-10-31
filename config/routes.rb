@@ -38,6 +38,8 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :mayor
   map.connect '/mayor/results', :controller => 'mayor', :action => 'results', :conditions => { :method => :get }
   map.connect '/borough/results', :controller => 'borough', :action => 'results', :conditions => { :method => :get }
+  #map.affichage '/affichage', :controller => 'affichage', :action => 'index', :conditions => { :method => :get }
+  map.resources :affichage
   
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
