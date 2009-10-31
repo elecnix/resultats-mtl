@@ -1,8 +1,18 @@
 <% arrondissement ||= @arrondissement %>
 <h2><%=arrondissement.nom%></h2>
 <table>
-<% arrondissement.mairie.candidats.each do |candidat| %>
-  <tr><td><%=candidat.prenom%> <%=candidat.nom%></td><td class="numeric"><%=candidat.nb_voix_obtenues%></td></tr>
+<% arrondissement.postes.each do |poste| %>
+  <% poste.candidats_projetmontreal.each do |candidat| %>
+    <tr>
+      <td>
+        <span class="nom"><%=candidat%></span>
+        <% if candidat.poste.district%><span class="district"><%=candidat.poste.district%></span><% end %>
+      </td>
+      <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
+      <td class="numeric"><%=candidat.pourcentage%>%</td>
+      <td class="numeric"><%=candidat.nb_voix_majorite%></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
 

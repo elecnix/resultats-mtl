@@ -10,6 +10,7 @@ class BoroughController < ApplicationController
     else
       @arrondissement = Arrondissement.find(:all, :limit => 3, :order => 'random()', :conditions => 'mtl_id > 0')[0]
     end
+    logger.info "Affiche arrondissement: #{@arrondissement.inspect}"
     #@arrondissement = Arrondissement.find(:first)
     render :layout => false
   end

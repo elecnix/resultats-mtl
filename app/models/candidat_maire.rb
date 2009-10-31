@@ -5,4 +5,8 @@ class CandidatMaire < ActiveRecord::Base
     nb_voix_exprimees = CandidatMaire.find(:all).inject { |voix, maire| maire.nb_voix_obtenues }
     nb_voix_obtenues / nb_voix_exprimees if nb_voix_exprimees > 0
   end
+  
+  def to_s
+    prenom + " " + nom
+  end
 end

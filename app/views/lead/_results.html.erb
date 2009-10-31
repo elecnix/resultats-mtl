@@ -1,2 +1,17 @@
+<% candidats ||= @candidats %>
+<% candidats ||= [] %>
 <h2>En avance</h2>
+<table>
+<% candidats.each do |candidat| %>
+  <tr>
+    <td>
+      <div class="nom"><%=candidat%></div>
+      <div class="arr_district"><%=candidat.poste.arrondissement%><% if candidat.poste.district %> (<%=candidat.poste.district%>)<% end %></div>
+    </td>
+    <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
+    <td class="numeric"><%=candidat.pourcentage%>%</td>
+    <td class="numeric"><%=candidat.nb_voix_majorite%></td>
+  </tr>
+<% end %>
+</table>
 

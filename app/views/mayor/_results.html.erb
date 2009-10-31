@@ -1,11 +1,20 @@
-<h2>Mairie de Montréal</h2>
-<table><tr>
-<td><table>
 <% maires ||= @maires %>
-<% maires.each do |maire| %>
-  <tr><td><%=maire.prenom%> <%=maire.nom%></td><td class="numeric"><%=maire.nb_voix_obtenues%></td><td class="numeric"><%=maire.pourcentage%>%</td></tr>
-<% end %>
-</table></td>
-<td><img src="http://chart.apis.google.com/chart?cht=bhs&chs=100x140&chd=t:<%=maires.collect {|m| m.pourcentage }.join(',') %>&chco=4d89f9&chbh=a"/></td>
-</tr></table>
+<h2>Mairie de Montréal</h2>
+<table>
+  <tr>
+    <td>
+      <table>
+        <% maires.each do |maire| %>
+          <tr>
+            <td><%=maire%></td>
+            <td class="numeric"><%=maire.nb_voix_obtenues%></td>
+            <td class="numeric"><%=maire.pourcentage%>%</td>
+            <td class="numeric"><%=maire.nb_voix_majorite%></td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+    <td><img src="http://chart.apis.google.com/chart?cht=bhs&chs=100x140&chd=t:<%=maires.collect {|m| m.pourcentage }.join(',') %>&chco=4d89f9&chbh=a"/></td>
+  </tr>
+</table>
 

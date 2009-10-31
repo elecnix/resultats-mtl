@@ -7,4 +7,7 @@ class Arrondissement < ActiveRecord::Base
     postes.find_by_mtl_type('MC')
   end
 
+  def to_s
+    nom
+  end
 end

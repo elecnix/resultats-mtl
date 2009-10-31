@@ -25,11 +25,13 @@ doc.root.each_element('//parti') do |tag|
 end
 
 doc.root.each_element('//district') do |tag|
-  @arr = District.find_or_initialize_by_mtl_id tag.attributes['id']
-  if @arr.new_record?
-    @arr.nom = tag.text
-    @arr.save!
-    puts @arr.inspect
+  if tag.attributes['id'].to_i > 0
+    @district = District.find_or_initialize_by_mtl_id tag.attributes['id']
+    if @district.new_record?
+      @district.nom = tag.text
+      @district.save!
+      puts @district.inspect
+    end
   end
 end
 
@@ -74,7 +76,7 @@ doc.root.each_element('//resultats_postes/poste') do |tag|
   poste.save!
   tag.each_element('candidat') do |can|
     candidat = poste.candidats.build
-    ['nom', 'prenom', 'nb_voix_obtenues'].each do |attry|
+    ['nom', 'prenom', 'nb_voix_obtenues', 'nb_voix_majorite'].each do |attry|
       candidat.update_attribute attry, can.elements[attry].text
     end
     candidat.parti = Parti.find_by_mtl_id(can.elements['parti'].attributes['id'])
