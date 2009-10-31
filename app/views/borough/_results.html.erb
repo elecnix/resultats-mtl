@@ -1,6 +1,13 @@
 <% arrondissement ||= @arrondissement %>
 <h2><%=arrondissement.nom%></h2>
 <table>
+<tr>
+  <th>Candidat (district)</th>
+  <th>Voix</th>
+  <th>%</th>
+  <th>Majorité</th>
+  <th>Participation</th>
+</tr>
 <% arrondissement.postes.each do |poste| %>
   <% poste.candidats_projetmontreal.each do |candidat| %>
     <tr>
@@ -11,6 +18,7 @@
       <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
       <td class="numeric"><%=candidat.pourcentage%>%</td>
       <td class="numeric"><%=candidat.nb_voix_majorite%></td>
+      <td class="numeric"><%=poste.taux_participation%>%</td>
     </tr>
   <% end %>
 <% end %>

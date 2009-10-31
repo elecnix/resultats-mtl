@@ -6,6 +6,15 @@ require 'rexml/document'
 file = File.new(ARGV[0])
 doc = REXML::Document.new(file.read)
 
+doc.root.each_element('//resultats_maire/sommaire') do |tag|
+  @sommaire = Sommaire.new
+  ['nb_electeurs_inscrits', 'nb_total_voix_recueillies', 'nb_bulletins_rejetes', 'taux_participation', 'nb_bureaux_depouilles', 'nb_bureaux_total'].each do |attry|
+    @sommaire.update_attribute attry, tag.elements[attry].text
+  end
+  @sommaire.save!
+  puts @sommaire.inspect
+end
+
 doc.root.each_element('//arrondissement') do |tag|
   @arr = Arrondissement.find_or_initialize_by_mtl_id tag.attributes['id']
   if @arr.new_record?

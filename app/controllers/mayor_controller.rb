@@ -4,6 +4,7 @@ class MayorController < ApplicationController
 
   def results
     @maires = CandidatMaire.find(:all, :order => "nb_voix_obtenues DESC")
+    @sommaire = Sommaire.find(:first)
     render :layout => false
   end
 end

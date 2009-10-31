@@ -1,9 +1,18 @@
-<% maires ||= @maires %>
+<%
+  maires ||= @maires
+  sommaire ||= @sommaire
+%>
 <h2>Mairie de Montréal</h2>
 <table>
   <tr>
     <td>
       <table>
+        <tr>
+          <th>Candidat</th>
+          <th>Voix</th>
+          <th/>
+          <th>Majorité</th>
+        </tr>
         <% maires.each do |maire| %>
           <tr>
             <td><%=maire%></td>
@@ -14,7 +23,9 @@
         <% end %>
       </table>
     </td>
-    <td><img src="http://chart.apis.google.com/chart?cht=bhs&chs=100x140&chd=t:<%=maires.collect {|m| m.pourcentage }.join(',') %>&chco=4d89f9&chbh=a"/></td>
+    <td>&nbsp;<br/><img src="http://chart.apis.google.com/chart?cht=bhs&chs=100x140&chd=t:<%=maires.collect {|m| m.pourcentage }.join(',') %>&chco=4d89f9&chbh=a"/></td>
   </tr>
 </table>
+Participation: <%=sommaire.taux_participation%>%
+<!-- img src="http://chart.apis.google.com/chart?cht=p&chd=t:<%=sommaire.taux_participation%>,<%=100-sommaire.taux_participation%>&chs=50x50&chco=00FF00,FF0000"/-->
 

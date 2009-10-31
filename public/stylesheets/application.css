@@ -22,3 +22,6 @@ body, p, ol, ul, td {
   font-size: 10px;
   font-style: italic;
 }
+th {
+  font-size: 10px;
+}
