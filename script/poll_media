@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'date'
+
+while true
+  url='http://dryrun.media.resultats.election-montreal.qc.ca/media.xml'
+  now = DateTime.now.strftime('%Y%m%d-%H%M')
+  file = "tmp/#{now}.xml"
+
+  `wget --quiet -O #{file} #{url}`
+
+  previous_generation=`sqlite3 db/development.sqlite3 "select date_heure_generation from sommaires"`.chomp
+  current_generation=`grep date_heure_generation #{file}`.chomp
+  current_generation.sub!(/.*date_heure_generation="(.*)".*/, '\1')
+
+  if previous_generation != current_generation
+    puts "#{now} #{previous_generation} != #{current_generation}"
+    `rm -v db/test.sqlite3`
+    puts "Creating test database..."
+    `rake db:create RAILS_ENV=test`
+    puts "Resetting test database..."
+    `rake db:reset RAILS_ENV=test`
+    puts "Importing..."
+    `export RAILS_ENV=test ; script/runner script/import #{file}`
+    puts "Backing up..."
+    `mkdir -p db/backup`
+    `cp -v db/development.sqlite3 db/backup/#{previous_generation}.xml`
+    puts "Replacing development database..."
+    `mv -v db/test.sqlite3 db/development.sqlite3`
+  else
+    puts "#{now} No change: #{current_generation}"
+  end
+  
+  sleep 60
+end
+
