@@ -1,8 +1,9 @@
 class PosteController < ApplicationController
   def index
+    default = Affichage.find(:first).arrondissement
     if !params['arrondissement_id'].nil?
       if params['arrondissement_id'] == "default"
-        arrondissement = Affichage.find(:first).arrondissement
+        arrondissement = default
         logger.info "Arrondissement par défaut: #{arrondissement.inspect}"
       else
         arrondissement = Arrondissement.find_by_id(params['arrondissement_id'])
@@ -13,10 +14,9 @@ class PosteController < ApplicationController
     if arrondissement
       @poste = arrondissement.postes[rand(arrondissement.postes.size)]
     else
-      @arrondissement = Arrondissement.find(:all, :limit => 3, :order => 'random()', :conditions => 'mtl_id > 0')[0]
-      @poste = Poste.find(:all, :limit => 3, :order => 'random()', :conditions => 'mtl_id > 0')[0]
+      @poste = Poste.find(:all, :limit => 3, :order => 'random()', :conditions => "mtl_id > 0 and arrondissement_id != #{default.id}")[0]
     end
-    logger.info "Affiche poste: #{@poste.inspect} dans #{@arrondissement.inspect}"
+    logger.info "Affiche poste: #{@poste.inspect} dans #{arrondissement.inspect}"
     render :layout => false
   end
 
