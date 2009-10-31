@@ -16,7 +16,7 @@
     </td>
     <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
     <td class="numeric"><%=candidat.pourcentage%>%</td>
-    <td class="numeric <%=(!candidat.nb_voix_majorite.nil? && candidat.nb_voix_majorite < 200 ? 'critique' : '')%>"><%=candidat.nb_voix_majorite%></td>
+    <td class="numeric <%=html_class_voix_majorite_poste(candidat.nb_voix_majorite)%>"><%=candidat.nb_voix_majorite%></td>
   </tr>
 <% end %>
 </table>

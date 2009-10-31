@@ -18,7 +18,7 @@
             <td class="nom <%=maire.parti.html_class%>"><%=maire%></td>
             <td class="numeric"><%=maire.nb_voix_obtenues%></td>
             <td class="numeric"><%=maire.pourcentage%>%</td>
-            <td class="numeric <%=(!maire.nb_voix_majorite.nil? && maire.nb_voix_majorite < 1000 ? 'critique' : '')%>"><%=maire.nb_voix_majorite%></td>
+            <td class="numeric <%=html_class_voix_majorite_maire(maire.nb_voix_majorite)%>"><%=maire.nb_voix_majorite%></td>
           </tr>
         <% end %>
       </table>
