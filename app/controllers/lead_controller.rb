@@ -7,7 +7,7 @@ class LeadController < ApplicationController
     parti = Parti.find(:first, :conditions => "nom LIKE '%Projet%'")
     if parti
       @candidats = parti.candidats
-      @candidats = @candidats.sort_by(&:nb_voix_obtenues).reverse![0..9]
+      @candidats = @candidats.sort_by(&:nb_voix_obtenues).reverse![0..6]
     end
     render :layout => false
   end

@@ -36,3 +36,6 @@ hr {
   border: 0;
   border-bottom: 1px solid #DDD;
 }
+#sommaire {
+  border-top: 2px solid #99F;
+}

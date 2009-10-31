@@ -4,6 +4,8 @@ class Parti < ActiveRecord::Base
   has_many :candidats
   
   def to_s
+    if nom.include? "Harel" ; return "Vision Montréal" ; end
+    if nom.include? "Tremblay" ; return "Union Montréal" ; end
     nom
   end
 end
