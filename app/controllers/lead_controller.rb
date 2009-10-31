@@ -9,5 +9,6 @@ class LeadController < ApplicationController
       @candidats = parti.candidats
       @candidats = @candidats.sort_by(&:nb_voix_obtenues).reverse![0..9]
     end
+    render :layout => false
   end
 end

@@ -4,8 +4,9 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/application.css"/>
   <%= javascript_include_tag "prototype" %>
   <script type="text/javascript">
-    var countdown = refresh_secs = 60;
+    var countdown = refresh_secs = 10;
     var rotate_secs = 4;
+    var should_reload_all = false;
     function initialize() {
       reload_all();
       setInterval( "tick()", 1000 );
@@ -14,25 +15,30 @@
     }
     function reload_all() {
       <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
-      <%= remote_function(:update => "borough", :url => "/borough/results?nom=plateau", :method => :get)%>      
-      <%= remote_function(:update => "random", :url => "/borough/results", :method => :get)%>      
+      <%= remote_function(:update => "poste", :url => "/poste?nom=plateau", :method => :get)%>      
+      <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>      
       <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
       countdown = refresh_secs;
       update_countdown();
     }
     function rotate() {
-      <%= remote_function(:update => "random", :url => "/borough/results", :method => :get)%>
+      if (should_reload_all) {
+        reload_all();
+        should_reload_all = false;
+      } else {
+        <%= remote_function(:update => "poste", :url => "/poste?nom=plateau", :method => :get)%>
+        <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>
+      }
     }
     function tick() {
       countdown--;
       if (countdown == 0) {
-        reload_all();
-      } else {
-        update_countdown();
+        should_reload_all = true;
       }
+      update_countdown();
     }
     function update_countdown() {
-      $('countdown_secs').update("" + countdown);
+      $('countdown_secs').update(should_reload_all ? "reloading..." : "" + countdown);
     }
   </script>
 </head>

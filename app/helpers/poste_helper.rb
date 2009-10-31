@@ -1,0 +1,2 @@
+module PosteHelper
+end
