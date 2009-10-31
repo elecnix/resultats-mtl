@@ -2,17 +2,15 @@ table {
   width: 100%;
 }
 h2 {
-  border-bottom: 2px solid #99F;
+  border-bottom: 2px solid #3392e0;
   font-size: 16px;
+  color: #34bf05;
 }
 h3 {
   font-size: 11px;
 }
 td {
   vertical-align: top;
-}
-td.numeric {
-  text-align: right;
 }
 #mayor {
   width: 50%;
@@ -27,6 +25,13 @@ body, p, ol, ul, td {
 }
 th {
   font-size: 10px;
+  text-align: left;
+}
+tr.odd {
+  /*background-color: #CCCCCC;*/
+}
+tr.even {
+  background-color: #FAFAFA;
 }
 .participation {
   font-size: 10px;
@@ -34,8 +39,34 @@ th {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #3392e0;
 }
 #sommaire {
   border-top: 2px solid #99F;
+}
+
+.UnionMontréal {
+  color: #8a8817;
+}
+.VisionMontréal {
+  color: #F00;
+}
+.ProjetMontréal {
+  font-weight: bold;
+  color: #34bf05;
+}
+.Montréal-Ville-Marie {
+  color: #2d5276;
+}
+.numeric {
+  text-align: right;
+}
+.avance_critique {
+  background-color: red;
+}
+.avance_attention {
+  background-color: yellow;
+}
+.avance_bonne {
+  font-weight: bold;
 }

@@ -6,6 +6,11 @@ class Parti < ActiveRecord::Base
   def to_s
     if nom.include? "Harel" ; return "Vision Montréal" ; end
     if nom.include? "Tremblay" ; return "Union Montréal" ; end
+    if nom.include? "Sullivan" ; return "Montréal-Ville-Marie" ; end
     nom
+  end
+  
+  def html_class
+    to_s.gsub(/ /, "")
   end
 end

@@ -9,16 +9,16 @@
       <table>
         <tr>
           <th>Candidat</th>
-          <th>Voix</th>
-          <th/>
-          <th>Majorité</th>
+          <th class="numeric">Voix</th>
+          <th class="numeric"/>
+          <th class="numeric">Majorité</th>
         </tr>
         <% maires.each do |maire| %>
-          <tr>
-            <td><%=maire%></td>
+          <tr class="<%= cycle('odd', 'even') %>">
+            <td class="nom <%=maire.parti.html_class%>"><%=maire%></td>
             <td class="numeric"><%=maire.nb_voix_obtenues%></td>
             <td class="numeric"><%=maire.pourcentage%>%</td>
-            <td class="numeric"><%=maire.nb_voix_majorite%></td>
+            <td class="numeric <%=(!maire.nb_voix_majorite.nil? && maire.nb_voix_majorite < 1000 ? 'critique' : '')%>"><%=maire.nb_voix_majorite%></td>
           </tr>
         <% end %>
       </table>

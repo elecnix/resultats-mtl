@@ -1,16 +1,22 @@
 <% candidats ||= @candidats %>
 <% candidats ||= [] %>
-<h2>En avance</h2>
+<h2>En avance pour Projet Montréal</h2>
 <table>
-<% candidats.each do |candidat| %>
   <tr>
+    <th>Candidat</th>
+    <th class="numeric">Voix</th>
+    <th class="numeric"></th>
+    <th class="numeric">Majorité</th>
+  </tr>
+<% candidats.each do |candidat| %>
+  <tr class="<%= cycle('odd', 'even') %>">
     <td>
       <div class="nom"><%=candidat%></div>
       <div class="arr_district"><%=candidat.poste.arrondissement%><% if candidat.poste.district %> (<%=candidat.poste.district%>)<% end %></div>
     </td>
     <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
     <td class="numeric"><%=candidat.pourcentage%>%</td>
-    <td class="numeric"><%=candidat.nb_voix_majorite%></td>
+    <td class="numeric <%=(!candidat.nb_voix_majorite.nil? && candidat.nb_voix_majorite < 200 ? 'critique' : '')%>"><%=candidat.nb_voix_majorite%></td>
   </tr>
 <% end %>
 </table>

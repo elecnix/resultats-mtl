@@ -4,14 +4,14 @@
 <table>
 <tr>
   <th>Candidat</th>
-  <th>Voix</th>
-  <th>%</th>
-  <th>Majorité</th>
+  <th class="numeric">Voix</th>
+  <th class="numeric"></th>
+  <th class="numeric">Majorité</th>
 </tr>
 <% @poste.candidats.each do |candidat| %>
-  <tr>
+  <tr class="<%= cycle('odd', 'even') %>">
     <td>
-      <span class="nom"><%=candidat%></span>
+      <span class="nom <%=candidat.parti.html_class%>"><%=candidat%></span>
     </td>
     <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
     <td class="numeric"><%=candidat.pourcentage%>%</td>

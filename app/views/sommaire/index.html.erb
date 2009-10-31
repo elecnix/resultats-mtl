@@ -1,7 +1,7 @@
 <div>
   Postes en avance: 
   <% @partis.each do |parti| %>
-  <span class="sommaire_parti"><%=parti%>: <%=parti.postes_en_avance%></span>
+  <span class="sommaire_parti <%=parti.html_class%>"><%=parti%>: <%=parti.postes_en_avance%></span>
   <% end %>
 </div>
 <span id="date_heure_generation">Données générées: <%=@sommaire.date_heure_generation%></span>
