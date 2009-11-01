@@ -16,6 +16,9 @@ class Candidat < ActiveRecord::Base
   end
 
   def to_s
+    if !parti.nil? && !parti.nom.nil? && parti.nom.include?("Projet") && poste.mtl_type == "CV" && !poste.district.nil? && poste.district.nom == "Jeanne-Mance"
+      return "Nima Machouf + #{prenom} #{nom}"
+    end
     prenom + " " + nom
   end
 end
