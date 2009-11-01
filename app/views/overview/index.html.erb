@@ -1,6 +1,6 @@
   <script type="text/javascript">
-    var countdown = refresh_secs = 10;
-    var rotate_secs = 4;
+    var countdown = refresh_secs = 60;
+    var rotate_secs = 5;
     var should_reload_all = false;
     function initialize() {
       reload_all();
@@ -11,11 +11,11 @@
     function reload_partially() {
       <%= remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)%>
       <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>
+      <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
     }
     function reload_all() {
       <%= remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)%>
       <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
-      <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
       reload_partially();
       countdown = refresh_secs;
       update_countdown();

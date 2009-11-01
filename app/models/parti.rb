@@ -4,7 +4,10 @@ class Parti < ActiveRecord::Base
   has_many :candidats
   
   def candidats_en_avance
-    Poste.find(:all).collect{|poste|poste.candidat_en_avance.parti == self ? poste.candidat_en_avance : nil }.compact!.sort_by(&:nb_voix_obtenues)
+    candidats = Poste.find(:all).collect{|poste|poste.candidat_en_avance.parti == self ? poste.candidat_en_avance : nil }.compact!.sort_by(&:nb_voix_obtenues).reverse!
+    p = 0
+    candidats.each{|c| c.position = p+=1}
+    candidats
   end
   
   def to_s

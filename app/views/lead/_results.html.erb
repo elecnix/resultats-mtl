@@ -7,6 +7,7 @@
     <th class="numeric">Voix</th>
     <th class="numeric"></th>
     <th class="numeric">Majorité</th>
+    <th class="numeric">#</th>
   </tr>
 <% candidats.each do |candidat| %>
   <tr class="<%= cycle('odd', 'even') %>">
@@ -17,6 +18,7 @@
     <td class="numeric"><%=candidat.nb_voix_obtenues%></td>
     <td class="numeric"><%=candidat.pourcentage%>%</td>
     <td class="numeric <%=html_class_voix_majorite_poste(candidat.nb_voix_majorite)%>"><%=candidat.nb_voix_majorite%></td>
+    <td class="numeric"><%=candidat.position%></td>
   </tr>
 <% end %>
 </table>
