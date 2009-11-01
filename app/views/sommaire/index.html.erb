@@ -1,7 +1,16 @@
 <div id="postes_en_avance">
   Postes en avance: 
   <% @partis.each do |parti| %>
-  <span class="sommaire_parti <%=parti.html_class%>"><%=parti%>: <%=parti.postes_en_avance%></span>
+  <span class="sommaire_parti <%=parti.html_class%>"><%=parti%>: <%=parti.conseillers_de_ville_en_avance.size%></span>
   <% end %>
 </div>
+<% if false %>
+TODO partis_en_avance_au_conseil_de_ville prend trop de temps
+<div id="conseillers_de_ville_en_avance">
+  Conseillers de ville en avance: 
+  <% @sommaire.partis_en_avance_au_conseil_de_ville.each do |parti| %>
+  <span class="<%=parti.html_class%>"><%=parti%>: <%=parti.postes_en_avance%></span>
+  <% end %>
+</div>
+<% end %>
 <span id="date_heure_generation">Données générées: <%=@sommaire.date_heure_generation%></span>
