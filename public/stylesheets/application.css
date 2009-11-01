@@ -2,9 +2,9 @@ table {
   width: 100%;
 }
 h2 {
-  border-bottom: 2px solid #3392e0;
+  border-bottom: 2px solid #174a8b;
   font-size: 16px;
-  color: #34bf05;
+  color: #174a8b;
 }
 h3 {
   font-size: 11px;
@@ -42,11 +42,11 @@ hr {
   border-bottom: 1px solid #3392e0;
 }
 #sommaire {
-  border-top: 2px solid #3392e0;
+  border-top: 2px solid #174a8b;
 }
 
 .UnionMontréal {
-  color: #8a8817;
+  color: #752331;
 }
 .VisionMontréal {
   color: #F00;
@@ -56,7 +56,7 @@ hr {
   color: #34bf05;
 }
 .Montréal-Ville-Marie {
-  color: #2d5276;
+  color: #ca9f54;
 }
 .numeric {
   text-align: right;
