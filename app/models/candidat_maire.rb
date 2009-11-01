@@ -2,8 +2,8 @@ class CandidatMaire < ActiveRecord::Base
   belongs_to :parti
   
   def pourcentage
-    nb_voix_exprimees = CandidatMaire.find(:all).inject { |voix, maire| maire.nb_voix_obtenues }
-    nb_voix_obtenues / nb_voix_exprimees if nb_voix_exprimees > 0
+    total = [CandidatMaire.find(:all).inject { |voix, maire| maire.nb_voix_obtenues }, Sommaire.find(:first).nb_total_voix_recueillies].max
+    format("%.f", nb_voix_obtenues / total.to_f * 100) if total > 0
   end
   
   def to_s
