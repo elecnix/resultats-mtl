@@ -42,7 +42,7 @@ hr {
   border-bottom: 1px solid #3392e0;
 }
 #sommaire {
-  border-top: 2px solid #99F;
+  border-top: 2px solid #3392e0;
 }
 
 .UnionMontréal {
@@ -69,4 +69,9 @@ hr {
 }
 .avance_bonne {
   font-weight: bold;
+}
+#postes_en_avance, .sommaire_parti {
+  padding-top: 1em;
+  padding-bottom: 5px;
+  font-size: 16px;
 }

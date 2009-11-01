@@ -1,4 +1,4 @@
-<div>
+<div id="postes_en_avance">
   Postes en avance: 
   <% @partis.each do |parti| %>
   <span class="sommaire_parti <%=parti.html_class%>"><%=parti%>: <%=parti.postes_en_avance%></span>
