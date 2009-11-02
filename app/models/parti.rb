@@ -8,7 +8,7 @@ class Parti < ActiveRecord::Base
   end
   
   def candidats_en_avance
-    candidats = Poste.find(:all).collect{|poste|poste.candidat_en_avance.parti == self ? poste.candidat_en_avance : nil }.compact!.sort_by(&:nb_voix_obtenues).reverse!
+    candidats = Poste.find(:all).collect{|poste|poste.candidat_en_avance.parti == self ? poste.candidat_en_avance : nil }.compact!.sort_by(&:nb_voix_obtenues).reject{|candidat| candidat.nb_voix_obtenues == 0}.reverse!
     p = 0
     candidats.each{|c| c.position = p+=1}
     candidats

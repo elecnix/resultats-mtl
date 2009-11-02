@@ -1,7 +1,7 @@
 <div id="postes_en_avance">
   Postes en avance: 
   <% @partis.each do |parti| %>
-  <span class="sommaire_parti <%=parti.html_class%>"><%=parti%>: <%=parti.conseillers_de_ville_en_avance.size%></span>
+  <span class="sommaire_parti <%=parti.html_class%>"><%=parti%>: <%=parti.candidats_en_avance.size%></span>
   <% end %>
 </div>
 <% if false %>

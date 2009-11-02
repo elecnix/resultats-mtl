@@ -2,6 +2,7 @@
 module ApplicationHelper
   def html_class_voix_majorite(voix, critique, attention)
     return if voix.nil?
+    return if voix == 0
     return 'avance_critique' if voix < critique
     return 'avance_attention' if voix < attention
     return 'avance_bonne'

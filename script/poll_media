@@ -9,7 +9,7 @@ while true
 
   `wget --quiet -O #{file} #{url}`
 
-  previous_generation=`sqlite3 db/development.sqlite3 "select date_heure_generation from sommaires"`.chomp
+  previous_generation=`sqlite3 db/production.sqlite3 "select date_heure_generation from sommaires"`.chomp
   current_generation=`grep date_heure_generation #{file}`.chomp
   current_generation.sub!(/.*date_heure_generation="(.*)".*/, '\1')
 
@@ -24,9 +24,10 @@ while true
     `export RAILS_ENV=test ; script/runner script/import #{file}`
     puts "Backing up..."
     `mkdir -p db/backup`
-    `cp -v db/development.sqlite3 db/backup/#{previous_generation}.xml`
-    puts "Replacing development database..."
-    `mv -v db/test.sqlite3 db/development.sqlite3`
+    `cp -v db/production.sqlite3 db/backup/#{previous_generation}.sqlite`
+    puts "Replacing production database..."
+    `mv -v db/test.sqlite3 db/production.sqlite3`
+    puts "Done!"
   else
     puts "#{now} No change: #{current_generation}"
   end

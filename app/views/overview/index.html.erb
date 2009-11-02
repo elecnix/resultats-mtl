@@ -1,6 +1,6 @@
   <script type="text/javascript">
     var countdown = refresh_secs = 60;
-    var rotate_secs = 5;
+    var rotate_secs = 10;
     var should_reload_all = false;
     function initialize() {
       reload_all();
@@ -9,13 +9,13 @@
       update_countdown();
     }
     function reload_partially() {
+      <%= remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)%>
+      <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
       <%= remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)%>
       <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>
       <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
     }
     function reload_all() {
-      <%= remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)%>
-      <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
       reload_partially();
       countdown = refresh_secs;
       update_countdown();
@@ -36,7 +36,7 @@
       update_countdown();
     }
     function update_countdown() {
-      $('countdown_secs').update(should_reload_all ? "maintenant..." : "" + countdown + "s");
+      //$('countdown_secs').update(should_reload_all ? "maintenant..." : "" + countdown + "s");
     }
   </script>
   
@@ -52,5 +52,5 @@
 </table>
 <div id="sommaire"></div>
 
-<span id="countdown">Prochaine <a href="#" onclick="reload_all(); return false">mise à jour</a>: <span id="countdown_secs"/></span>
+<span id="countdown"></span>
 
