@@ -1,0 +1,4 @@
+# Each run of poll_media creates an XML file, even if it did not change.
+# This will create a 'unique' directory with unique XML files. Only files with a different MD5 sum will be copied.
+cd tmp/
+mkdir unique ; for f in `ls 2009*.xml` ; do echo -n "$f: " ; grep `md5sum $f` unique/MD5SUMS || ( echo -n '+' ; cp $f unique/ ; md5sum $f >> unique/MD5SUMS ) ; echo ; done
