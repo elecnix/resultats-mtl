@@ -1,3 +1,10 @@
+= Résultats d'élection de Montréal =
+
+Voici une application Rails pour importer et afficher le fichier XML fourni aux médias lors des élections municipales de Montréal.
+
+Le fichier XML des résultats officiels, minute par minute, sont disponibles ici:
+# http://github.com/elecnix/resultats-mtl-2009
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create 
