@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SommaireController < ApplicationController
   def index
     @sommaire = Sommaire.find(:first)

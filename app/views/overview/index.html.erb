@@ -9,11 +9,18 @@
       update_countdown();
     }
     function reload_partially() {
-      <%= remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)%>
-      <%= remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)%>
-      <%= remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)%>
-      <%= remote_function(:update => "random", :url => "/poste", :method => :get)%>
-      <%= remote_function(:update => "leads", :url => "/lead/results", :method => :get)%>
+      $.ajax({
+        type: 'GET',
+        url: '/sommaire',
+        data: '',
+        success: function(data){eval(data);}
+      });
+
+      //remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)
+      //remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)
+      //remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)
+      //remote_function(:update => "random", :url => "/poste", :method => :get)
+      //remote_function(:update => "leads", :url => "/lead/results", :method => :get)
     }
     function reload_all() {
       reload_partially();

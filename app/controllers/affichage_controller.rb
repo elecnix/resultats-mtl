@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class AffichageController < ApplicationController
   def index
     @affichage = Affichage.find(:first)
