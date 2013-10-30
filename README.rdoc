@@ -1,4 +1,4 @@
-= Résultats d'élection de Montréal =
+= Résultats d'élection de Montréal
 
 Voici une application Rails pour importer et afficher le fichier XML fourni aux médias lors des élections municipales de Montréal.
 
