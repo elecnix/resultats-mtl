@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Parti < ActiveRecord::Base
+  attr_accessible :nom
   has_one :candidat_maire
   has_many :candidat_maire_arrondissement
   has_many :candidats

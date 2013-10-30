@@ -9,18 +9,11 @@
       update_countdown();
     }
     function reload_partially() {
-      $.ajax({
-        type: 'GET',
-        url: '/sommaire',
-        data: '',
-        success: function(data){eval(data);}
-      });
-
-      //remote_function(:update => "sommaire", :url => "/sommaire", :method => :get)
-      //remote_function(:update => "mayor", :url => "/mayor/results", :method => :get)
-      //remote_function(:update => "poste", :url => "/poste?arrondissement_id=default", :method => :get)
-      //remote_function(:update => "random", :url => "/poste", :method => :get)
-      //remote_function(:update => "leads", :url => "/lead/results", :method => :get)
+      $("#sommaire").load("/sommaire");
+      $("#mayor").load("/mayor/results");
+      $("#poste").load("/poste?arrondissement_id=default");
+      $("#random").load("/poste");
+      $("#leads").load("/lead/results");
     }
     function reload_all() {
       reload_partially();
@@ -43,7 +36,7 @@
       update_countdown();
     }
     function update_countdown() {
-      //$('countdown_secs').update(should_reload_all ? "maintenant..." : "" + countdown + "s");
+      $('#countdown').text(should_reload_all ? "maintenant..." : "" + countdown + "s");
     }
   </script>
   
