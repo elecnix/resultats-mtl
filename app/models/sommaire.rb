@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Sommaire < ActiveRecord::Base
 
   def partis_en_avance_au_conseil_de_ville

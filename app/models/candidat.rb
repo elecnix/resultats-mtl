@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Candidat < ActiveRecord::Base
   belongs_to :parti
   belongs_to :poste

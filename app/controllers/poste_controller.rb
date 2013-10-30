@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PosteController < ApplicationController
   def index
     default = Affichage.find(:first).arrondissement

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CandidatMaire < ActiveRecord::Base
   belongs_to :parti
   

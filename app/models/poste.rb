@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Poste < ActiveRecord::Base
   belongs_to :arrondissement
   belongs_to :district
