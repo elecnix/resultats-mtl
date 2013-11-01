@@ -16,7 +16,7 @@ class PosteController < ApplicationController
     if arrondissement
       @poste = arrondissement.postes[rand(arrondissement.postes.size)]
     else
-      @poste = Poste.find(:all, :limit => 3, :order => 'random()', :conditions => "mtl_id > 0 and arrondissement_id != #{default.id}")[0]
+      @poste = Poste.find(:all, :limit => 3, :order => 'random()', :conditions => "arrondissement_id != #{default.id}")[0]
     end
     logger.info "Affiche poste: #{@poste.inspect} dans #{arrondissement.inspect}"
     render :layout => false

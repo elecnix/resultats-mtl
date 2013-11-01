@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20131030000705) do
     t.integer "nb_voix_obtenues"
     t.integer "nb_voix_majorite"
     t.integer "parti_id"
-    t.integer "poste_id"
   end
 
   create_table "candidats", :force => true do |t|
@@ -63,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20131030000705) do
   end
 
   create_table "postes", :force => true do |t|
-    t.integer "mtl_id"
+    t.string "mtl_id" # Yes, this is a string: '00,00'
     t.string  "mtl_type"
     t.integer "arrondissement_id"
     t.integer "district_id"

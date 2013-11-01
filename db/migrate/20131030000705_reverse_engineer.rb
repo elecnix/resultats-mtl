@@ -39,7 +39,6 @@ class ReverseEngineer < ActiveRecord::Migration
       t.integer :nb_voix_obtenues
       t.integer :nb_voix_majorite
       t.integer :parti_id
-      t.integer :poste_id
     end
     create_table :candidat_maire_arrondissements do |t|
       t.integer :mtl_id
@@ -50,7 +49,7 @@ class ReverseEngineer < ActiveRecord::Migration
       t.integer :nb_voix_obtenues
     end
     create_table :postes do |t|
-      t.integer :mtl_id
+      t.string :mtl_id # Yes, this is a string: '00,00'
       t.string :mtl_type
       t.integer :arrondissement_id
       t.integer :district_id
@@ -77,5 +76,6 @@ class ReverseEngineer < ActiveRecord::Migration
     drop_table :candidats
     drop_table :candidat_maires
     drop_table :candidat_maire_arrondissements
+    drop_table :affichages
   end
 end
