@@ -1,0 +1,10 @@
+#!/bin/bash
+# Download media.xml using wget.
+# Setup:
+# echo -e "ftp_user=mtlelection\nftp_password=XXX\n" >> ~/.wgetrc ; chmod go-rwx ~/.wgetrc
+
+file="${1-media.xml}"
+url="${2-ftp://ftp-ville-election2013.tinkweb.ca/media.xml}"
+
+echo "Downloading to $file: $url"
+wget --quiet -O "$file" "$url"
