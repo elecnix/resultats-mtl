@@ -14,4 +14,8 @@
 /log/*.log
 /tmp
 
+# DB config contains passwords
 config/database.yml
+
+# Eclipse
+.project

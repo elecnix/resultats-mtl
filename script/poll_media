@@ -1,37 +1,27 @@
-#!/usr/bin/env ruby
-
 require 'date'
 
 while true
-  url='http://dryrun.media.resultats.election-montreal.qc.ca/media.xml'
   now = DateTime.now.strftime('%Y%m%d-%H%M')
   file = "tmp/#{now}.xml"
 
-  `wget --quiet -O #{file} #{url}`
+  url="http://marchildon.net" # DO NOT COMMIT
+  puts `script/download #{file} #{url}`
 
-  previous_generation=`sqlite3 db/production.sqlite3 "select date_heure_generation from sommaires"`.chomp
+  sommaire = Sommaire.find(:first)
+  previous_generation=sommaire.date_heure_generation
   current_generation=`grep date_heure_generation #{file}`.chomp
   current_generation.sub!(/.*date_heure_generation="(.*)".*/, '\1')
 
   if previous_generation != current_generation
     puts "#{now} #{previous_generation} != #{current_generation}"
-    `rm -v db/test.sqlite3`
-    puts "Creating test database..."
-    `rake db:create RAILS_ENV=test`
-    puts "Resetting test database..."
-    `rake db:reset RAILS_ENV=test`
-    puts "Importing..."
-    `export RAILS_ENV=test ; script/runner script/import #{file}`
-    puts "Backing up..."
-    `mkdir -p db/backup`
-    `cp -v db/production.sqlite3 db/backup/#{previous_generation}.sqlite`
-    puts "Replacing production database..."
-    `mv -v db/test.sqlite3 db/production.sqlite3`
-    puts "Done!"
+    `TIME='%e' time --output=/tmp/elapsed script/rails runner script/import #{file}`
+    elapsed=`cat /tmp/elapsed`.to_i
+    puts "Imported in #{elapsed} seconds."
   else
     puts "#{now} No change: #{current_generation}"
   end
   
-  sleep 60
+  sleep_time = 120 - elapsed
+  puts "Sleeping for #{sleep_time} seconds."
+  sleep(sleep_time)
 end
-
