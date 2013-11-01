@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 require 'rexml/document'
 
-# TODO Empty DB and insert new records in a single DB transaction
-
 file = File.new(ARGV[0])
 doc = REXML::Document.new(file.read)
 
@@ -46,12 +44,11 @@ doc.root.each_element('//district') do |tag|
 end
 
 doc.root.each_element('//resultats_maire/sommaire/candidat') do |tag|
-  @maire = CandidatMaire.new
+  @maire = CandidatMaire.find_or_initialize_by_mtl_id tag.attributes['id']
   #@maire.update_attributes tag.elements.to_hash {|e| [e.name, e.text] }
   ['nom', 'prenom', 'nb_voix_obtenues', 'nb_voix_majorite'].each do |attry|
     @maire.update_attribute attry, tag.elements[attry].text
   end
-  @maire.mtl_id = tag.attributes['id']
   @maire.parti = Parti.find_by_mtl_id(tag.elements['parti'].attributes['id'])
   @maire.save!
   puts @maire.inspect
@@ -74,10 +71,9 @@ end
 doc.root.each_element('//resultats_postes/poste') do |tag|
   arrondissement = Arrondissement.find_by_mtl_id(tag.elements['arrondissement'].attributes['id'])
   district = District.find_by_mtl_id(tag.elements['district'].attributes['id'])
-  poste = Poste.new
+  poste = Poste.find_or_initialize_by_mtl_id tag.attributes['id']
   poste.arrondissement = arrondissement
   poste.district = district
-  poste.mtl_id = tag.attributes['id']
   poste.mtl_type = tag.elements['type'].text
   %W{nom nb_electeurs_inscrits nb_total_voix_recueillies nb_bulletins_rejetes taux_participation nb_bureaux_depouilles nb_bureaux_total}.each do |attry|
     poste.update_attribute attry, tag.elements[attry].text
@@ -109,7 +105,7 @@ ActiveRecord::Base.connection.select_rows("select parti_id, count(*) from candid
   parti.save!
 end
 
-affichage = Affichage.new
+affichage = Affichage.find(:first)
+affichage ||= Affichage.new
 affichage.arrondissement = Arrondissement.find(:first, :conditions => "nom LIKE '%Plateau%'")
 affichage.save!
-
