@@ -21,7 +21,7 @@ while true
     elapsed=0
   end
   
-  sleep_time = 120 - elapsed
+  sleep_time = [0, 120 - elapsed].max
   puts "Sleeping for #{sleep_time} seconds."
   sleep(sleep_time)
 end
