@@ -1,0 +1,84 @@
+#!/usr/bin/env ruby
+require 'rexml/document'
+require 'json'
+
+file = File.new(ARGV[0])
+doc = REXML::Document.new(file.read)
+json = {}
+json[:date_heure_generation] = doc.root.attributes['date_heure_generation']
+
+def fmt(elem, type)
+  case type
+  when :i
+    elem.text.to_i
+  when :f
+    elem.text.to_f
+  when :s
+    elem.text
+  else
+    elem
+  end
+end
+
+def json_for_id_nom(doc, xpath)
+  elements = {}
+  doc.root.each_element(xpath) do |tag|
+    id = tag.attributes['id'].to_i
+    elements[id] = {:id => id, :nom => tag.text.try(:strip) || tag.elements["nom"].try(:text) }
+  end
+  elements.map { |k,v| v }
+end
+
+json[:partis] = json_for_id_nom(doc, '/resultats/resultats_postes/poste/candidat/parti')
+json[:arrondissements] = json_for_id_nom(doc, '/resultats/resultats_postes/poste/arrondissement')
+json[:districts] = json_for_id_nom(doc, '/resultats/resultats_postes/poste/district')
+
+# Mairie de ville
+json[:mairie] = json_mairie = {}
+doc.root.each_element('/resultats/resultats_maire/sommaire') do |tag|
+  {'nb_electeurs_inscrits' => :i,
+    'nb_total_voix_recueillies' => :i,
+    'nb_bulletins_rejetes' => :i,
+    'taux_participation' => :f,
+    'nb_bureaux_depouilles' => :i,
+    'nb_bureaux_total' => :i}.each do |attry, type|
+    json_mairie[attry] = fmt(tag.elements[attry], type)
+  end
+  json_mairie[:candidats] = candidats = []
+  tag.each_element('candidat') do |can|
+    candidat = {
+      'nom' => :s,
+      'prenom' => :s,
+      'nb_voix_obtenues' => :i,
+      'nb_voix_majorite' => :i
+    }.inject({}) { |h, (k, v)| h[k] = fmt(can.elements[k], v); h }
+    candidat[:parti] = can.elements['parti'].attributes['id'].to_i
+    candidats << candidat
+  end
+end
+
+# Postes
+json[:postes] = json_postes = []
+doc.root.each_element('/resultats/resultats_postes/poste') do |tag|
+  json_postes << poste = {
+    :id => tag.attributes['id'],
+    :arrondissement => tag.elements['arrondissement'].attributes['id'],  
+    :district => tag.elements['district'].attributes['id'],
+    :type => tag.elements['type'].text
+  }
+  %W{nom nb_electeurs_inscrits nb_total_voix_recueillies nb_bulletins_rejetes taux_participation nb_bureaux_depouilles nb_bureaux_total}.each do |attry|
+    poste[attry] = tag.elements[attry].text
+  end
+  poste[:candidats] = candidats = []
+  tag.each_element('candidat') do |can|
+    candidats << candidat = {
+      :id => can.attributes['id'].to_i,
+      :parti => can.elements['parti'].attributes['id'].to_i
+    }
+    ['nom', 'prenom', 'nb_voix_obtenues', 'nb_voix_majorite'].each do |attry|
+      candidat[attry] = can.elements[attry].text
+    end
+  end
+end
+
+puts JSON.pretty_generate(json)
