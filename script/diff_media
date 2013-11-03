@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+# in: media-old.xml media-new.xml
+# out: evenements.json
+require 'rexml/document'
+require 'json'
+
+old_file = File.new(ARGV[0])
+new_file = File.new(ARGV[1])
+old_doc = REXML::Document.new(old_file.read)
+new_doc = REXML::Document.new(new_file.read)
+json = {}
+json[:date_heure_generation] = new_doc.root.attributes['date_heure_generation']
+json[:date_heure_generation_previous] = old_doc.root.attributes['date_heure_generation']
+
+def fmt(elem, type)
+  case type
+  when :i
+    elem.text.to_i
+  when :f
+    elem.text.to_f
+  when :s
+    elem.text
+  else
+  elem
+  end
+end
+
+
+candidats_avant = {}
+candidats_maintenant = {}
+json[:evenements] = evenements = []
+#json[:mairie_avant] = mairie_avant
+#json[:mairie_maintenant] = mairie_maintenant
+
+old_doc.root.each_element('/resultats/resultats_maire/sommaire/candidat | /resultats/resultats_postes/poste/candidat') do |tag|
+  candidats_avant[tag.attributes['id'].to_i] = {
+    'nb_voix_obtenues' => tag.elements['nb_voix_obtenues'].text.to_i,
+    'nb_voix_majorite' => tag.elements['nb_voix_majorite'].text.to_i,
+  }
+end
+new_doc.root.each_element('/resultats/resultats_maire/sommaire/candidat | /resultats/resultats_postes/poste/candidat') do |tag|
+  id = tag.attributes['id'].to_i
+  candidat = {
+    'nom' => :s,
+    'prenom' => :s,
+    'nb_voix_obtenues' => :i,
+    'nb_voix_majorite' => :i
+  }.inject({}) { |h, (k, v)| h[k] = fmt(tag.elements[k], v); h }
+  candidat[:id] = id
+  candidat[:parti] = tag.elements['parti'].attributes['id'].to_i
+  candidats_maintenant[id] = candidat
+
+  before = candidats_avant[id]['nb_voix_majorite']
+  after = candidat['nb_voix_majorite']
+  candidat['nb_voix_majorite'] = [before, after]
+  candidat['nb_voix_obtenues'] = [candidats_avant[id]['nb_voix_obtenues'], candidat['nb_voix_obtenues']]
+  if before > 0 && after == 0
+    candidat[:evenement] = :perdant
+    evenements << candidat
+  elsif before == 0 && after > 0
+    candidat[:evenement] = :gagnant
+    evenements << candidat
+  end
+end
+
+
+puts JSON.pretty_generate(json)
