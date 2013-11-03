@@ -24,7 +24,7 @@ def json_for_id_nom(doc, xpath)
   elements = {}
   doc.root.each_element(xpath) do |tag|
     id = tag.attributes['id'].to_i
-    elements[id] = {:id => id, :nom => tag.text.try(:strip) || tag.elements["nom"].try(:text) }
+    elements[id] = {:id => id, :nom => tag.text }
   end
   elements.map { |k,v| v }
 end
