@@ -7,10 +7,12 @@ file="${1-media.xml}"
 url="${2-ftp://ftp-ville-election2013.tinkweb.ca/media.xml}"
 repo="${3-history}"
 
-echo "Downloading to $file: $url"
 mkdir -p "$repo" # Please 'git init . && git add media.xml' manually if you want to preserve history.
 
+echo "Downloading to $repo/media.xml: $url"
 wget --quiet -O "$repo/media.xml" "$url"
-
+git --git-dir="$repo/.git" --work-tree="$repo" commit -a -m "Download $file"
+cp -v "$file" "$file.old"
 cp -v "$repo/media.xml" "$file"
-git --git-dir="$repo/.git" --work-tree="$repo" commit -a -m "Download"
+
+script/xml_to_json "$file" > "$file.json"
