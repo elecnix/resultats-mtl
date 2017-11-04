@@ -18,9 +18,6 @@ class Parti < ActiveRecord::Base
   end
   
   def to_s
-    if nom.include? "Harel" ; return "Vision Montréal" ; end
-    if nom.include? "Tremblay" ; return "Union Montréal" ; end
-    if nom.include? "Sullivan" ; return "Montréal-Ville-Marie" ; end
     nom
   end
   

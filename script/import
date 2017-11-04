@@ -57,11 +57,11 @@ end
 doc.root.each_element('//resultats_maire/arrondissements/arrondissement') do |tag|
   arrondissement = Arrondissement.find_by_mtl_id(tag.attributes['id'])
   tag.each_element('candidat') do |can|
-    candidat = arrondissement.candidat_maire_arrondissements.build
+    candidat = CandidatMaireArrondissement.find_or_initialize_by_mtl_id_and_arrondissement_id(can.attributes['id'], arrondissement.id)
+    candidat.arrondissement = arrondissement
     ['nom', 'prenom', 'nb_voix_obtenues'].each do |attry|
       candidat.update_attribute attry, can.elements[attry].text
     end
-    candidat.mtl_id = can.attributes['id']
     candidat.parti = Parti.find_by_mtl_id(can.elements['parti'].attributes['id'])
     candidat.save!
     puts candidat.inspect
@@ -81,12 +81,12 @@ doc.root.each_element('//resultats_postes/poste') do |tag|
   puts poste.inspect
   poste.save!
   tag.each_element('candidat') do |can|
-    candidat = poste.candidats.build
+    candidat = Candidat.find_or_initialize_by_mtl_id can.attributes['id']
+    candidat.poste = poste
     ['nom', 'prenom', 'nb_voix_obtenues', 'nb_voix_majorite'].each do |attry|
       candidat.update_attribute attry, can.elements[attry].text
     end
     candidat.parti = Parti.find_by_mtl_id(can.elements['parti'].attributes['id'])
-    candidat.mtl_id = can.attributes['id']
     puts candidat.inspect
     candidat.save!
   end
@@ -95,13 +95,11 @@ end
 Poste.find(:all).each do |poste|
   poste.candidat_en_avance = poste.candidats.max {|a,b| a.nb_voix_obtenues <=> b.nb_voix_obtenues }
   poste.save!
-  puts "Candidat en avance pour #{poste}: #{poste.candidat_en_avance}"
 end
 
 ActiveRecord::Base.connection.select_rows("select parti_id, count(*) from candidats c join postes p on p.candidat_en_avance_id = c.id group by c.parti_id limit 3").each do |row|
   parti = Parti.find_by_id(row[0])
   parti.postes_en_avance = row[1]
-  puts "Postes en avance pour #{parti}: #{parti.postes_en_avance}"
   parti.save!
 end
 
