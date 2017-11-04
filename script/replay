@@ -1,0 +1,9 @@
+repo=history
+git="git --git-dir=$repo/.git --work-tree=$repo"
+for hash in $($git log --reverse --pretty="format:%H" ..origin/2013|head -n3000) ; do
+  $git checkout $hash -- media.xml
+  echo $'\n\n'
+  echo "Importing $hash ################################################################"
+  rails runner script/import history/media.xml
+done
+
