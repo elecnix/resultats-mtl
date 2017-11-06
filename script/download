@@ -14,3 +14,4 @@ cp -v "$file" "$file.old"
 cp -v "$repo/media.xml" "$file"
 
 script/xml_to_json "$file" > "$file.json"
+cp -v "$file.json" "$repo/media.xml.json"
