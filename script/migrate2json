@@ -1,0 +1,31 @@
+#!/bin/bash
+
+repo=history
+orig_git="git --git-dir=$repo/.git --work-tree=$repo"
+
+target=history-json
+target_git="git --git-dir=$target/.git --work-tree=$target"
+git init $target
+touch $target/media.json
+$target_git add media.json
+$target_git commit -m "Initially empty"
+
+for hash in $($orig_git log --reverse --pretty="format:%H" ..origin/2013) ; do
+  echo "Converting $hash"
+  $orig_git checkout $hash -- media.xml
+  script/xml_to_json $repo/media.xml > $target/media.json && {
+    git --git-dir=$target/.git --work-tree=$target commit -m "Migrated" media.json
+  }
+done
+
+exit
+
+# Parallel version (WARNING!)
+declare -i version=1
+for hash in $($orig_git log --reverse --pretty="format:%H" ..origin/2013) ; do
+  echo "Converting $hash"
+  $orig_git checkout $hash -- media.xml
+  script/xml_to_json $repo/media.xml > history-tmp/media-$(printf "%05d" $version).json &
+  version=$version+1
+done
+

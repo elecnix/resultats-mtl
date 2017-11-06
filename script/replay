@@ -1,9 +1,17 @@
+#!/bin/bash
+declare -i version=1
 repo=history
 git="git --git-dir=$repo/.git --work-tree=$repo"
-for hash in $($git log --reverse --pretty="format:%H" ..origin/2013|head -n3000) ; do
+for hash in $($git log --reverse --pretty="format:%H" 878f050cbf901b04d9246a686529106c35818b29..origin/2013|head -n2000) ; do
   $git checkout $hash -- media.xml
   echo $'\n\n'
   echo "Importing $hash ################################################################"
-  rails runner script/import history/media.xml
+  #rails runner script/import history/media.xml
+  script/xml_to_json history/media.xml > history/media.json && {
+    cp oyezmtl/public/media.json oyezmtl/build/media.previous.json
+    cp history/media.json oyezmtl/build/media.json
+    cp history/media.json tmp/media.$version.json
+    version=$version+1
+  }
 done
 
