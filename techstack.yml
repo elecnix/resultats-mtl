@@ -1,7 +1,8 @@
 repo_name: elecnix/resultats-mtl
 report_id: bccf7914f1e9559591ed77820a957132
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-09T15:35:16+00:00'
+timestamp: '2024-01-04T14:59:18+00:00'
 requested_by: elecnix
 provider: github
 branch: master
@@ -15,6 +16,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/elecnix/resultats-mtl
   detection_source: Repo Metadata
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -25,6 +27,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/elecnix/resultats-mtl
   detection_source: Repo Metadata
 - name: Ruby
   description: A dynamic, interpreted, open source programming language with a focus
@@ -35,6 +38,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/989/ruby.png
+  detection_source_url: https://github.com/elecnix/resultats-mtl
   detection_source: Repo Metadata
 - name: Rails
   description: Web development that doesn't hurt
@@ -46,7 +50,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Frameworks (Full Stack)
   image_url: https://img.stackshare.io/service/990/x57_Lorv.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -59,6 +63,7 @@ tools:
   category: Libraries
   sub_category: Javascript UI Libraries
   image_url: https://img.stackshare.io/service/1021/lxEKmMnB_400x400.jpg
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -70,6 +75,7 @@ tools:
   category: Data Stores
   sub_category: Databases
   image_url: https://img.stackshare.io/service/1028/ASOhU5xJ.png
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -81,6 +87,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/elecnix/resultats-mtl
   detection_source: Repo Metadata
 - name: RubyGems
   description: Easily download, install, and use ruby software packages on your system
@@ -90,6 +97,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Package Managers
   image_url: https://img.stackshare.io/service/12795/5jL6-BA5_400x400.jpeg
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -101,6 +109,7 @@ tools:
   category: Communications
   sub_category: Transactional Email
   image_url: https://img.stackshare.io/service/43/kQ_6nwmP.jpg
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/config/environments/production.rb
   detection_source: config/environments/production.rb
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -113,6 +122,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/elecnix/resultats-mtl
   detection_source: Repo Metadata
 - name: UglifyJS
   description: A JavaScript parser, minifier, compressor and beautifier toolkit.
@@ -122,6 +132,7 @@ tools:
   category: Libraries
   sub_category: Javascript Utilities & Libraries
   image_url: https://img.stackshare.io/service/2203/default_9058af6f02375a99f634f537d727e32df92ac262.png
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -135,7 +146,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18896/default_9386886dd1c6c396a11bd4b49732afb9ec444f8d.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -150,7 +161,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18864/default_96cb61a9c0f8ef41b80df83209dca4f4c229184e.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -207,7 +218,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18855/default_d343d9a7c573fa5dcbeb4d3c43d2ffe4afa82cc1.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -221,7 +232,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18876/default_d416e715a80ce80ae31b87cff032f5873c8a9d2a.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
@@ -236,7 +247,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/18967/default_20d16c1471b93397c8ef93b19baf0989f59663c0.png
-  detection_source_url: Gemfile.lock
+  detection_source_url: https://github.com/elecnix/resultats-mtl/blob/master/Gemfile.lock
   detection_source: Gemfile
   last_updated_by: Nicolas Marchildon
   last_updated_on: 2013-10-29 02:46:26.000000000 Z
