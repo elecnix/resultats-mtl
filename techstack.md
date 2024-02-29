@@ -3,14 +3,14 @@
 ## Tech Stack
 elecnix/resultats-mtl is built on the following main stack:
 
-- [Twilio SendGrid](http://sendgrid.com) – Transactional Email
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - [Ruby](https://www.ruby-lang.org) – Languages
 - [Rails](http://rubyonrails.org/) – Frameworks (Full Stack)
 - [jQuery](http://jquery.com/) – Javascript UI Libraries
 - [PostgreSQL](http://www.postgresql.org/) – Databases
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- [UglifyJS](http://lisperator.net/uglifyjs/) – Javascript Utilities & Libraries
+- [Twilio SendGrid](http://sendgrid.com) – Transactional Email
 - [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- [UglifyJS](http://lisperator.net/uglifyjs/) – Javascript Utilities & Libraries
 
 Full tech stack [here](/techstack.md)
 
@@ -20,14 +20,14 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 elecnix/resultats-mtl is built on the following main stack:
 
-- <img width='25' height='25' src='https://img.stackshare.io/service/43/kQ_6nwmP.jpg' alt='Twilio SendGrid'/> [Twilio SendGrid](http://sendgrid.com) – Transactional Email
+- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/990/x57_Lorv.png' alt='Rails'/> [Rails](http://rubyonrails.org/) – Frameworks (Full Stack)
 - <img width='25' height='25' src='https://img.stackshare.io/service/1021/lxEKmMnB_400x400.jpg' alt='jQuery'/> [jQuery](http://jquery.com/) – Javascript UI Libraries
 - <img width='25' height='25' src='https://img.stackshare.io/service/1028/ASOhU5xJ.png' alt='PostgreSQL'/> [PostgreSQL](http://www.postgresql.org/) – Databases
-- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/2203/default_9058af6f02375a99f634f537d727e32df92ac262.png' alt='UglifyJS'/> [UglifyJS](http://lisperator.net/uglifyjs/) – Javascript Utilities & Libraries
+- <img width='25' height='25' src='https://img.stackshare.io/service/43/kQ_6nwmP.jpg' alt='Twilio SendGrid'/> [Twilio SendGrid](http://sendgrid.com) – Transactional Email
 - <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- <img width='25' height='25' src='https://img.stackshare.io/service/2203/default_9058af6f02375a99f634f537d727e32df92ac262.png' alt='UglifyJS'/> [UglifyJS](http://lisperator.net/uglifyjs/) – Javascript Utilities & Libraries
 
 Full tech stack [here](/techstack.md)
 
@@ -38,7 +38,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [elecnix/resultats-mtl](https://github.com/elecnix/resultats-mtl)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|16<br/>Tools used|01/05/24 <br/>Report generated|
+|16<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
